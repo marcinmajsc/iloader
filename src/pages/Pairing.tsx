@@ -27,7 +27,6 @@ export const Pairing = () => {
       loadingRef.current = true;
       setLoading(true);
       let list = await invoke<PairingAppInfo[]>("installed_pairing_apps");
-      console.log(list);
       setApps(list);
       setLoading(false);
       loadingRef.current = false;
@@ -62,7 +61,11 @@ export const Pairing = () => {
     <>
       <h2>{t("pairing.manage")}</h2>
       {apps.length === 0 ? (
-        <div>{loading ? t("pairing.loading_app") : t("pairing.no_supported_apps_found")}</div>
+        <div>
+          {loading
+            ? t("pairing.loading_app")
+            : t("pairing.no_supported_apps_found")}
+        </div>
       ) : (
         <div className="card">
           <div className="certificate-table-container">
