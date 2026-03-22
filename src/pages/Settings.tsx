@@ -118,7 +118,10 @@ export const Settings = ({ showHeading = true }: SettingsProps) => {
                 () =>
                   toast.promise(invoke("reset_anisette_state"), {
                     loading: t("settings.resetting_anisette_state"),
-                    success: t("settings.anisette_state_reset_success"),
+                    success: (didReset) =>
+                      didReset
+                        ? t("settings.anisette_state_reset_success")
+                        : t("settings.anisette_state_not_found"),
                     error: (e) =>
                       err(t("settings.failed_reset_anisette_state"), e),
                   }),

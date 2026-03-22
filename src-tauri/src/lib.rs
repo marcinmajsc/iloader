@@ -11,8 +11,9 @@ mod operation;
 
 use crate::{
     account::{
-        delete_account, delete_app_id, get_certificates, invalidate_account, list_app_ids,
-        logged_in_as, login_new, login_stored, reset_anisette_state, revoke_certificate,
+        delete_account, delete_app_id, get_certificates, invalidate_account, keyring_available,
+        list_app_ids, logged_in_as, login_new, login_stored, reset_anisette_state,
+        revoke_certificate,
     },
     device::{DeviceInfoMutex, list_devices, set_selected_device},
     pairing::{export_pairing_cmd, installed_pairing_apps, place_pairing_cmd},
@@ -111,6 +112,7 @@ pub fn run() {
             place_pairing_cmd,
             reset_anisette_state,
             export_pairing_cmd,
+            keyring_available
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

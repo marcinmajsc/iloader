@@ -114,14 +114,21 @@ pub fn invalidate_account(sideloader_state: State<'_, SideloaderMutex>) {
 }
 
 #[tauri::command]
-pub fn reset_anisette_state() -> Result<(), String> {
+pub fn reset_anisette_state() -> Result<bool, String> {
     let state_entry = Entry::new("iloader", "anisette_state")
         .map_err(|e| format!("Failed to create keyring entry for anisette: {:?}.", e))?;
-    state_entry
-        .delete_credential()
-        .map_err(|e| format!("Failed to delete anisette state: {:?}", e))?;
 
-    Ok(())
+    match state_entry.delete_credential() {
+        Ok(_) => {
+            debug!("Anisette state deleted from keyring.");
+            Ok(true)
+        }
+        Err(keyring::Error::NoEntry) => {
+            debug!("No existing anisette state found in keyring, nothing to delete.");
+            Ok(false)
+        }
+        Err(e) => Err(format!("Failed to delete anisette state: {:?}", e)),
+    }
 }
 
 async fn login(
@@ -350,7 +357,8 @@ pub async fn delete_app_id(
 
 static KEYRING_AVAILABLE: OnceLock<bool> = OnceLock::new();
 
-fn keyring_available() -> bool {
+#[tauri::command]
+pub fn keyring_available() -> bool {
     *KEYRING_AVAILABLE.get_or_init(check_keyring_available)
 }
 

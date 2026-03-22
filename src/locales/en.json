@@ -176,6 +176,7 @@
     "reset_anisette_message": "Are you sure you want to reset the anisette state? You will be required to enter your 2FA code again.",
     "resetting_anisette_state": "Resetting anisette state...",
     "anisette_state_reset_success": "Anisette state reset successfully",
+    "anisette_state_not_found": "No anisette state to reset",
     "failed_reset_anisette_state": "Failed to reset anisette state",
     "reset_anisette_state": "Reset anisette state",
     "view_logs": "View Logs",
