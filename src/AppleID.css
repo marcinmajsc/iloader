@@ -191,3 +191,7 @@
 .cert-item label {
   pointer-events: none;
 }
+
+.credentials-warning {
+  margin: 0;
+}

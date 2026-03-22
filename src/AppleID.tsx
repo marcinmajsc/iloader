@@ -37,6 +37,21 @@ export const AppleID = ({
   const [chooseCertsOpen, setChooseCertsOpen] = useState<boolean>(false);
   const { err } = useError();
 
+  const [noKeyringAvailable, setNoKeyringAvailable] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkKeyring = async () => {
+      try {
+        let available = await invoke<boolean>("keyring_available");
+        setNoKeyringAvailable(!available);
+      } catch (e) {
+        console.error("Unable to check keyring availability:", e);
+        setNoKeyringAvailable(true);
+      }
+    };
+    checkKeyring();
+  }, []);
+
   useEffect(() => {
     let getLoggedInAs = async () => {
       let account = await invoke<string | null>("logged_in_as");
@@ -56,7 +71,7 @@ export const AppleID = ({
   }, [certs]);
 
   const listenerAdded = useRef<boolean>(false);
-  const unlisten = useRef<() => void>(() => { });
+  const unlisten = useRef<() => void>(() => {});
 
   useEffect(() => {
     if (!listenerAdded.current) {
@@ -74,7 +89,7 @@ export const AppleID = ({
   }, []);
 
   const certListenerAdded = useRef<boolean>(false);
-  const certUnlisten = useRef<() => void>(() => { });
+  const certUnlisten = useRef<() => void>(() => {});
 
   useEffect(() => {
     if (!certListenerAdded.current) {
@@ -190,21 +205,26 @@ export const AppleID = ({
         )}
         {((loggedInAs === null && storedIds.length === 0) ||
           addAccountOpen) && (
-            <div className="new-login">
-              {storedIds.length > 0 && <h3>{t("apple_id.new_login")}</h3>}
-              <div className="credentials">
-                <input
-                  type="email"
-                  placeholder={t("apple_id.email_placeholder")}
-                  value={emailInput}
-                  onChange={(e) => setEmailInput(e.target.value)}
-                />
-                <input
-                  type="password"
-                  placeholder={t("apple_id.password_placeholder")}
-                  value={passwordInput}
-                  onChange={(e) => setPasswordInput(e.target.value)}
-                />
+          <div className="new-login">
+            {storedIds.length > 0 && <h3>{t("apple_id.new_login")}</h3>}
+            <div className="credentials">
+              <input
+                type="email"
+                placeholder={t("apple_id.email_placeholder")}
+                value={emailInput}
+                onChange={(e) => setEmailInput(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder={t("apple_id.password_placeholder")}
+                value={passwordInput}
+                onChange={(e) => setPasswordInput(e.target.value)}
+              />
+              {noKeyringAvailable ? (
+                <p className="settings-hint credentials-warning">
+                  {t("apple_id.no_keyring_available")}
+                </p>
+              ) : (
                 <div className="save-credentials">
                   <input
                     type="checkbox"
@@ -212,48 +232,51 @@ export const AppleID = ({
                     checked={saveCredentials}
                     onChange={(e) => setSaveCredentials(e.target.checked)}
                   />
-                  <label htmlFor="save-credentials">{t("apple_id.save_credentials")}</label>
+                  <label htmlFor="save-credentials">
+                    {t("apple_id.save_credentials")}
+                  </label>
                 </div>
-                <button
-                  onClick={async () => {
-                    if (!emailInput || !passwordInput) {
-                      toast.warning(t("apple_id.enter_email_password"));
-                      return;
-                    }
-                    if (!emailInput.includes("@")) {
-                      toast.warning(t("apple_id.valid_email"));
-                      return;
-                    }
-                    let promise = async () => {
-                      await invoke("login_new", {
-                        email: emailInput,
-                        password: passwordInput,
-                        saveCredentials: saveCredentials,
-                        anisetteServer,
-                      });
-                      setForceUpdateIds((v) => v + 1);
-                    };
-                    toast.promise(promise, {
-                      loading: t("apple_id.logging_in"),
-                      success: t("apple_id.logged_in_success"),
-                      error: (e) => err(t("apple_id.login_failed"), e),
+              )}
+              <button
+                onClick={async () => {
+                  if (!emailInput || !passwordInput) {
+                    toast.warning(t("apple_id.enter_email_password"));
+                    return;
+                  }
+                  if (!emailInput.includes("@")) {
+                    toast.warning(t("apple_id.valid_email"));
+                    return;
+                  }
+                  let promise = async () => {
+                    await invoke("login_new", {
+                      email: emailInput,
+                      password: passwordInput,
+                      saveCredentials: saveCredentials,
+                      anisetteServer,
                     });
+                    setForceUpdateIds((v) => v + 1);
+                  };
+                  toast.promise(promise, {
+                    loading: t("apple_id.logging_in"),
+                    success: t("apple_id.logged_in_success"),
+                    error: (e) => err(t("apple_id.login_failed"), e),
+                  });
+                }}
+              >
+                {t("apple_id.login")}
+              </button>
+              {addAccountOpen && storedIds.length > 0 && (
+                <button
+                  onClick={() => {
+                    setAddAccountOpen(false);
                   }}
                 >
-                  {t("apple_id.login")}
+                  {t("common.cancel")}
                 </button>
-                {addAccountOpen && storedIds.length > 0 && (
-                  <button
-                    onClick={() => {
-                      setAddAccountOpen(false);
-                    }}
-                  >
-                    {t("common.cancel")}
-                  </button>
-                )}
-              </div>
+              )}
             </div>
-          )}
+          </div>
+        )}
       </div>
       <Modal sizeFit isOpen={tfaOpen} zIndex={2000}>
         <h2>{t("apple_id.two_factor_title")}</h2>
@@ -281,9 +304,7 @@ export const AppleID = ({
       </Modal>
       <Modal sizeFit isOpen={certs !== null} zIndex={2000}>
         <h2 className="cert-header">{t("apple_id.max_certs_title")}</h2>
-        <p className="certs-desc">
-          {t("apple_id.max_certs_desc")}
-        </p>
+        <p className="certs-desc">{t("apple_id.max_certs_desc")}</p>
         <p
           className="certs-see"
           role="button"

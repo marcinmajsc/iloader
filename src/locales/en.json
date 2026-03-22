@@ -78,7 +78,8 @@
     "max_certs_desc": "iloader will revoke your existing certificates and generate a new one.",
     "hide_certificate_list": "Hide certificate list",
     "choose_what_to_revoke": "Choose what to revoke",
-    "continue": "Continue"
+    "continue": "Continue",
+    "no_keyring_available": "Unable to save credentials on this device."
   },
   "device": {
     "title": "iDevice",
