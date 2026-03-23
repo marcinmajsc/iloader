@@ -78,7 +78,8 @@
     "max_certs_desc": "iloader var olan sertifikaları geçersiz kılıp yeni bir tane oluşturacak.",
     "hide_certificate_list": "Sertifikalar listesini gizle",
     "choose_what_to_revoke": "Geçersiz kılınacağı seçiniz",
-    "continue": "Devam et"
+    "continue": "Devam et",
+    "no_keyring_available": "Bu cihaza giriş bilgileri kaydedilemedi."
   },
   "device": {
     "title": "iCihaz",
@@ -163,7 +164,8 @@
     "pairing_file_exported_success": "Eşleşme dosyası dışa aktarıldı!",
     "failed_export_pairing_file": "Eşleşme dosyası dışa aktarma başarısız",
     "export_not_recommended": "Dışa Aktar (önerilmez)",
-    "refresh_installed_apps": "Yüklü Uygulamaları Yenile"
+    "refresh_installed_apps": "Yüklü Uygulamaları Yenile",
+    "place_all": "Tüm uygulamalara koy"
   },
   "settings": {
     "title": "Ayarlar",
@@ -176,6 +178,7 @@
     "reset_anisette_message": "Anisette durumu yenilemek istediğinize emin misiniz? Tekrar iki aşamalı doğrulama kodu girmeniz gerekecek.",
     "resetting_anisette_state": "Anisette durumu yenileniyor...",
     "anisette_state_reset_success": "Anisette durumu yenilendi",
+    "anisette_state_not_found": "Yenilenecek Anisette durumu bulunamadı",
     "failed_reset_anisette_state": "Anisette durumu yenileme başarısız",
     "reset_anisette_state": "Anisette Durumu Yenile",
     "view_logs": "Kayıtları Görüntüle",
