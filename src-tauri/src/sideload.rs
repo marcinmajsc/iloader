@@ -1,10 +1,11 @@
 use std::{path::PathBuf, sync::Mutex};
 
 use crate::{
-    device::{get_provider, DeviceInfoMutex},
+    device::{DeviceInfoMutex, get_provider, get_provider_from_connection},
     operation::Operation,
-    pairing::{get_sidestore_info, place_pairing},
+    pairing::{get_sidestore_info, pairing_file, place_pairing},
 };
+use idevice::usbmuxd::UsbmuxdConnection;
 use isideload::sideload::{application::SpecialApp, sideloader::Sideloader};
 use tauri::{AppHandle, Manager, State, Window};
 
@@ -94,9 +95,15 @@ pub async fn install_sidestore_operation(
     // TODO: Cache & check version to avoid re-downloading
     let (filename, url) = if live_container {
         if nightly {
-            ("LiveContainerSideStore-Nightly.ipa", "https://github.com/LiveContainer/LiveContainer/releases/download/nightly/LiveContainer+SideStore.ipa")
+            (
+                "LiveContainerSideStore-Nightly.ipa",
+                "https://github.com/LiveContainer/LiveContainer/releases/download/nightly/LiveContainer+SideStore.ipa",
+            )
         } else {
-            ("LiveContainerSideStore.ipa", "https://github.com/LiveContainer/LiveContainer/releases/latest/download/LiveContainer+SideStore.ipa")
+            (
+                "LiveContainerSideStore.ipa",
+                "https://github.com/LiveContainer/LiveContainer/releases/latest/download/LiveContainer+SideStore.ipa",
+            )
         }
     } else if nightly {
         (
@@ -139,9 +146,29 @@ pub async fn install_sidestore_operation(
         get_sidestore_info(device.clone(), live_container).await,
     )?;
     if let Some(info) = sidestore_info {
+        let mut usbmuxd = op.fail_if_err(
+            "pairing",
+            UsbmuxdConnection::default()
+                .await
+                .map_err(|e| format!("Failed to connect to usbmuxd: {}", e)),
+        )?;
+
+        let provider = op.fail_if_err(
+            "pairing",
+            get_provider_from_connection(&device, &mut usbmuxd).await,
+        )?;
+
+        let file = op.fail_if_err("pairing", pairing_file(device, &mut usbmuxd).await)?;
+
+        let bytes = op.fail_if_err(
+            "pairing",
+            file.serialize()
+                .map_err(|e| format!("Failed to serialize pairing file: {}", e)),
+        )?;
+
         op.fail_if_err(
             "pairing",
-            place_pairing(device, info.bundle_id, info.path).await,
+            place_pairing(bytes, &provider, info.bundle_id, info.path).await,
         )?;
     } else {
         return op.fail(
