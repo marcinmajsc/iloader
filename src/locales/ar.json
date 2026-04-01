@@ -78,7 +78,8 @@
     "max_certs_desc": "سيحذف شهادتك ويقوم بإنتاج شهادة جديدة iLoader",
     "hide_certificate_list": "اخفاء قائمة الشهادات",
     "choose_what_to_revoke": "اختر الشهادة التي تريد حذفها",
-    "continue": "استمر"
+    "continue": "استمر",
+    "no_keyring_available": "فشل حفظ البيانات على هذا الجهاز"
   },
   "device": {
     "title": "iDevice",
@@ -163,7 +164,8 @@
     "pairing_file_exported_success": "تم استخراج ملف الإقتران!",
     "failed_export_pairing_file": "فشل استخراج ملف الإقتران.",
     "export_not_recommended": "(استخراجه (لا ينصح بهذه الطريقة",
-    "refresh_installed_apps": "تحديث التطبيقات المثبتة"
+    "refresh_installed_apps": "تحديث التطبيقات المثبتة",
+    "place_all": "ضع ملف الاقتران في كل التطبيقات"
   },
   "settings": {
     "title": "الإعدادات",
@@ -176,6 +178,7 @@
     "reset_anisette_message": "هل أنت متأكد من رغبتك بإعادة تعيين سيرفيرات أنيسيت؟ سيتحتم عليك إعادة إدخال رمز التحقق بخطوتين.",
     "resetting_anisette_state": "يتم إعادة تعيين سيرفيرات أنيسيت",
     "anisette_state_reset_success": "تم إعادة تعيين سيرفيرات أنيسيت!",
+  	"anisette_state_not_found": "لا يوجد سيرفر أنيسيت لإعادة تعيينه",
     "failed_reset_anisette_state": "فشل إعادة تعيين سيرفيرات أنيسيت.",
     "reset_anisette_state": "إعادة تعيين سيرفيرات أنيسيت.",
     "view_logs": "عرض السجلات",
