@@ -89,7 +89,7 @@
     "found_devices": "تم العثور على أجهزة",
     "unable_load_devices_prefix": "فشل تحديث الأجهزة:",
     "no_devices_found_period": "لم يتم العثور على أجهزة.",
-    "selected": "تم الاختيار"
+    "selected": "تم الاختيار",
     "pairing_in_progress_header": "{{device}} يتم الاقتران مع",
     "pairing_in_progress_hint": "يرجى إلغاء قفل جهازك والضغط على \"الوثوق\" ثم كتابة رمزك للدخول في حال طلب منك ذلك",
     "pairing_cancel": "إلغاء"
@@ -189,7 +189,14 @@
     "info": "معلومات",
     "warn": "تحذير",
     "error": "خطأ",
-    "language_hint": "بإمكانك المساعدة في الترجمة من <translation>هنا</translation>."
+    "language_hint": "<translation>هنا</translation> بإمكانك المساعدة في الترجمة من", 
+    "delete_stored_rppairing": "حذف ملف الإقتران المحفوظ",
+    "delete_stored_rppairing_message": "هل أنت متأكد من رغبتك بحذف ملف الإقتران المحفوظ؟ هذا سيتطلب منك إعادة الإقتران مجدداً",
+    "deleting_stored_rppairing": "...يتم حذف ملف الإقتران المحفوظ",
+    "stored_rppairing_deleted_success": "!تم حذف ملف الإقتران المحفوظ",
+    "failed_delete_stored_rppairing": "فشل حذف ملف الإقتران المحفوظ",
+    "dont_use_keyring": "Don't use keyring",
+    "dont_use_keyring_message": "This makes iloader less secure by storing pairing files, anisette state, and certitficates on disk. Enable this only if the default keyring storage doesn't work and you understand the risks."
   },
   "dialog": {
     "confirm": "تأكيد",
