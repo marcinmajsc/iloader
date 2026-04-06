@@ -75,12 +75,12 @@ async fn generate_lockdown_plist(
 
     pairing_file.udid = Some(device.udid.clone());
 
-    let mut lc = LockdownClient::connect(provider)
-        .await
-        .map_err(|e| AppError::DeviceComs("Failed to connect to lockdown".into(), e.to_string()))?;
+    let mut lc = LockdownClient::connect(provider).await.map_err(|e| {
+        AppError::DeviceComsWithMessage("Failed to connect to lockdown".into(), e.to_string())
+    })?;
 
     lc.start_session(&pairing_file).await.map_err(|e| {
-        AppError::DeviceComs("Failed to start lockdown session".into(), e.to_string())
+        AppError::DeviceComsWithMessage("Failed to start lockdown session".into(), e.to_string())
     })?;
 
     lc.set_value(
@@ -416,7 +416,7 @@ pub async fn installed_pairing_apps(
         InstallationProxyClient::connect(&provider)
             .await
             .map_err(|e| {
-                AppError::DeviceComs(
+                AppError::DeviceComsWithMessage(
                     "Failed to connect to installation proxy".into(),
                     e.to_string(),
                 )
@@ -425,7 +425,9 @@ pub async fn installed_pairing_apps(
     let installed_apps = installation_proxy
         .get_apps(Some("User"), None)
         .await
-        .map_err(|e| AppError::DeviceComs("Failed to get installed apps".into(), e.to_string()))?;
+        .map_err(|e| {
+            AppError::DeviceComsWithMessage("Failed to get installed apps".into(), e.to_string())
+        })?;
 
     let mut installed = HashMap::new();
     for (bundle_id, app) in installed_apps {
@@ -465,7 +467,7 @@ pub async fn get_sidestore_info(
         InstallationProxyClient::connect(&provider)
             .await
             .map_err(|e| {
-                AppError::DeviceComs(
+                AppError::DeviceComsWithMessage(
                     "Failed to connect to installation proxy".into(),
                     e.to_string(),
                 )
@@ -474,7 +476,9 @@ pub async fn get_sidestore_info(
     let installed_apps = installation_proxy
         .get_apps(Some("User"), None)
         .await
-        .map_err(|e| AppError::DeviceComs("Failed to get installed apps".into(), e.to_string()))?;
+        .map_err(|e| {
+            AppError::DeviceComsWithMessage("Failed to get installed apps".into(), e.to_string())
+        })?;
 
     for (bundle_id, app) in installed_apps {
         let n = app

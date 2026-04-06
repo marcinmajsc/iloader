@@ -1,3 +1,4 @@
+use idevice::IdeviceError;
 use isideload::SideloadError;
 use rootcause::Report;
 use serde::Serialize;
@@ -6,6 +7,12 @@ use serde::ser::{SerializeStruct, Serializer};
 #[derive(Debug, thiserror::Error, Clone, strum::AsRefStr)]
 #[strum(serialize_all = "snake_case")]
 pub enum AppError {
+    #[error("{0}")]
+    MaxApps(String),
+    #[error("{0}")]
+    NotEnoughAppIds(String),
+    #[error("{0}")]
+    DeviceComs(String),
     #[error("{0}")]
     Underage(String),
     #[error("{0}")]
@@ -27,7 +34,7 @@ pub enum AppError {
     #[error("Failed to emit status to frontend: {0}")]
     OperationUpdate(String),
     #[error("{0}: {1}")]
-    DeviceComs(String, String),
+    DeviceComsWithMessage(String, String),
     #[error("{0}: {1}")]
     Usbmuxd(String, String),
     #[error("Not logged in")]
@@ -36,8 +43,10 @@ pub enum AppError {
     NoDeviceSelected,
     #[error("{0}")]
     Anisette(String),
+    #[error("{0}")]
+    Keyring(String),
     #[error("Keyring error: {0} - {1}")]
-    Keyring(String, String),
+    KeyringWithMessage(String, String),
     #[error("{0}: {1}")]
     Storage(String, String),
     #[error("{0}")]
@@ -64,6 +73,9 @@ impl From<Report> for AppError {
         let report_str = report.to_string();
 
         for cause in report.iter_reports() {
+            if let Some(_) = cause.downcast_current_context::<keyring::Error>() {
+                return AppError::Keyring(report_str);
+            }
             if let Some(err) = cause.downcast_current_context::<SideloadError>() {
                 match err {
                     &SideloadError::AuthWithMessage(code, _) => match code {
@@ -78,10 +90,24 @@ impl From<Report> for AppError {
                             return AppError::Developer(report_str);
                         }
                     },
+                    SideloadError::IdeviceError(idev_err) => match idev_err {
+                        IdeviceError::Socket(_) => {
+                            return AppError::DeviceComs(report_str);
+                        }
+                        IdeviceError::ApplicationVerificationFailed(e) => {
+                            if e.contains("maximum number of installed apps") {
+                                return AppError::MaxApps(report_str);
+                            }
+                        }
+                        _ => {}
+                    },
                     _ => {}
                 }
             }
             let cause_str = cause.to_string();
+            if cause_str.contains("Not enough available app IDs") {
+                return AppError::NotEnoughAppIds(report_str);
+            }
             if cause_str.contains("Failed to get anisette data for login")
                 || cause_str.contains("Failed to get anisette client info")
                 || cause_str.contains("Failed to get anisette headers")

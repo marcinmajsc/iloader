@@ -66,7 +66,10 @@ pub async fn list_devices() -> Result<Vec<DeviceInfo>, AppError> {
                 let mut lockdown_client =
                     LockdownClient::connect(&provider).await.map_err(|e| {
                         eprintln!("Unable to connect to lockdown for {}: {e:?}", d.udid);
-                        AppError::DeviceComs("Unable to connect to lockdown".into(), e.to_string())
+                        AppError::DeviceComsWithMessage(
+                            "Unable to connect to lockdown".into(),
+                            e.to_string(),
+                        )
                     })?;
 
                 let device_name_value = lockdown_client
@@ -74,12 +77,15 @@ pub async fn list_devices() -> Result<Vec<DeviceInfo>, AppError> {
                     .await
                     .map_err(|e| {
                     eprintln!("Failed to fetch DeviceName for {}: {e:?}", d.udid);
-                    AppError::DeviceComs("Failed to fetch DeviceName".into(), e.to_string())
+                    AppError::DeviceComsWithMessage(
+                        "Failed to fetch DeviceName".into(),
+                        e.to_string(),
+                    )
                 })?;
 
                 let device_name = device_name_value.as_string().ok_or_else(|| {
                     eprintln!("DeviceName for {} was not a string", d.udid);
-                    AppError::DeviceComs(
+                    AppError::DeviceComsWithMessage(
                         "Failed to fetch DeviceName".into(),
                         "DeviceName was not a string".to_string(),
                     )
@@ -167,7 +173,9 @@ pub async fn get_provider_from_connection(
     let device = connection
         .get_device(&device_info.udid)
         .await
-        .map_err(|e| AppError::DeviceComs("Failed to get device".into(), e.to_string()))?;
+        .map_err(|e| {
+            AppError::DeviceComsWithMessage("Failed to get device".into(), e.to_string())
+        })?;
 
     let provider = device.to_provider(UsbmuxdAddr::from_env_var().unwrap(), "iloader");
     Ok(provider)

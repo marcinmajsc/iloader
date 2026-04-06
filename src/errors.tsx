@@ -3,7 +3,7 @@ import type { TFunction } from "i18next";
 export const errorSuggestionKeys = {
   underage: ["error.suggestions.underage"],
   account_locked: ["error.suggestions.account_locked"],
-  developer: ["error.suggestions.developer"],
+  developer: [],
   auth: ["error.suggestions.auth"],
   download: ["error.suggestions.download"],
   house_arrest: [
@@ -16,6 +16,10 @@ export const errorSuggestionKeys = {
   canceled: [],
   operation_update: [],
   device_coms: ["error.suggestions.device_coms", "error.suggestions.trust"],
+  device_coms_with_message: [
+    "error.suggestions.device_coms",
+    "error.suggestions.trust",
+  ],
   usbmuxd: [
     "error.suggestions.usbmuxd",
     "error.suggestions.device_coms",
@@ -32,6 +36,8 @@ export const errorSuggestionKeys = {
   ],
   misc: ["error.suggestions.misc"],
   filesystem: ["error.suggestions.filesystem", "error.suggestions.admin"],
+  not_enough_app_ids: ["error.suggestions.not_enough_app_ids"],
+  max_apps: ["error.suggestions.max_apps"],
 } as const;
 
 export type ErrorVariant = keyof typeof errorSuggestionKeys;
