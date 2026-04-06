@@ -72,14 +72,14 @@ export const Device = ({
           setWaitingToPair(null);
           setSelectedDevice(device);
         })
-        .catch((err) => {
+        .catch((e) => {
           if (pairingRequestId.current !== requestId) {
             return;
           }
 
-          const message = String(err ?? "");
+          const message = String((e.message ?? e) ?? "Unknown error");
           if (message !== "Pairing cancelled") {
-            toast.error(message);
+            toast.error(err(t("device.failed_select"), e));
           }
           clearPairingModalTimer();
           setShowPairingModal(false);
@@ -159,7 +159,7 @@ export const Device = ({
           pairingRequestId.current += 1;
           clearPairingModalTimer();
           setShowPairingModal(false);
-          invoke("cancel_pairing").catch(() => {});
+          invoke("cancel_pairing").catch(() => { });
           setWaitingToPair(null);
         }}
       >

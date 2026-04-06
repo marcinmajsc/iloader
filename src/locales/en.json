@@ -92,7 +92,8 @@
     "selected": "Selected",
     "pairing_in_progress_header": "Pairing with {{device}}...",
     "pairing_in_progress_hint": "Please unlock your device and click \"Trust,\" then enter your passcode if prompted.",
-    "pairing_cancel": "Cancel"
+    "pairing_cancel": "Cancel",
+    "failed_select": "Failed to select device"
   },
   "operation": {
     "failed": "Operation failed.",
@@ -244,8 +245,12 @@
         "Ensure your device is properly connected to your computer.",
         "Unplug and reconnect the device. If the issue persists, try a different USB port and cable."
       ],
-      "not_logged_in": ["Sign in to your Apple ID first."],
-      "no_device_selected": ["Select a device before continuing."],
+      "not_logged_in": [
+        "Sign in to your Apple ID first."
+      ],
+      "no_device_selected": [
+        "Select a device before continuing."
+      ],
       "anisette": [
         "Ensure your computer is connected to the internet.",
         "Change your anisette server. Try several different servers.",
