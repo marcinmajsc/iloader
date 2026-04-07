@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::sync::Arc;
 use tauri::{AppHandle, Emitter};
 use tracing_subscriber::layer::Context;
-use tracing_subscriber::{registry::LookupSpan, Layer};
+use tracing_subscriber::{Layer, registry::LookupSpan};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ExtendedLogRecord {
@@ -42,22 +42,54 @@ where
 
         let target = metadata.target().to_string();
 
-        struct MessageVisitor {
+        struct EventVisitor {
             message: String,
+            fields: Vec<String>,
         }
 
-        impl Visit for MessageVisitor {
-            fn record_debug(&mut self, field: &tracing::field::Field, value: &dyn std::fmt::Debug) {
+        impl EventVisitor {
+            fn push_field(&mut self, field: &tracing::field::Field, value: String) {
                 if field.name() == "message" {
-                    self.message = format!("{:?}", value);
+                    self.message = value;
+                } else {
+                    self.fields.push(format!("{}={}", field.name(), value));
                 }
             }
         }
 
-        let mut visitor = MessageVisitor {
+        impl Visit for EventVisitor {
+            fn record_i64(&mut self, field: &tracing::field::Field, value: i64) {
+                self.push_field(field, value.to_string());
+            }
+
+            fn record_u64(&mut self, field: &tracing::field::Field, value: u64) {
+                self.push_field(field, value.to_string());
+            }
+
+            fn record_bool(&mut self, field: &tracing::field::Field, value: bool) {
+                self.push_field(field, value.to_string());
+            }
+
+            fn record_str(&mut self, field: &tracing::field::Field, value: &str) {
+                self.push_field(field, value.to_string());
+            }
+
+            fn record_debug(&mut self, field: &tracing::field::Field, value: &dyn std::fmt::Debug) {
+                self.push_field(field, format!("{:?}", value));
+            }
+        }
+
+        let mut visitor = EventVisitor {
             message: String::new(),
+            fields: Vec::new(),
         };
         event.record(&mut visitor);
+
+        let message = if visitor.fields.is_empty() {
+            visitor.message
+        } else {
+            format!("{} ({})", visitor.message, visitor.fields.join(", "))
+        };
 
         let timestamp = chrono::Local::now()
             .format("%Y-%m-%d %H:%M:%S%.3f")
@@ -65,7 +97,7 @@ where
 
         let record = ExtendedLogRecord {
             level,
-            message: visitor.message,
+            message,
             target: Some(target),
             timestamp,
         };

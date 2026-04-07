@@ -2696,9 +2696,9 @@ dependencies = [
 
 [[package]]
 name = "hmac"
-version = "0.13.0-rc.6"
+version = "0.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "60017b071c523c9e5a55dd1253582bff6150c5e96a7e8511e419de1ab5ee97f9"
+checksum = "6303bc9732ae41b04cb554b844a762b4115a61bfaa81e3e83050991eeb56863f"
 dependencies = [
  "digest 0.11.2",
 ]
@@ -2981,9 +2981,9 @@ checksum = "b9e0384b61958566e926dc50660321d12159025e767c18e043daf26b70104c39"
 
 [[package]]
 name = "idevice"
-version = "0.1.56"
+version = "0.1.57"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5f010b58daf4e3799822c1b1401a067fa45c91a9896ef1f47cd59eec7e0c335f"
+checksum = "926edea5c192201fb01834e47987c9ba10f26ba9ef5bf75d1ce6e4711bd6f98d"
 dependencies = [
  "aes 0.8.4",
  "async-stream",
@@ -3008,7 +3008,7 @@ dependencies = [
  "rustls",
  "serde",
  "serde_json",
- "sha1",
+ "sha1 0.10.6",
  "sha2 0.10.9",
  "thiserror 2.0.18",
  "tokio",
@@ -3197,9 +3197,9 @@ checksum = "a6cb138bb79a146c1bd460005623e142ef0181e3d0219cb493e02f7d08a35695"
 
 [[package]]
 name = "isideload"
-version = "0.2.20"
+version = "0.2.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0658bd21bcc34abe56f5c4e52d54cc5c860c3d97522a63fa97b3339ade604dde"
+checksum = "1f7050617dd652be4f810371cccf1f3969f8b07ce6772a48bde8e86a03ceeebe"
 dependencies = [
  "aes 0.9.0-rc.4",
  "aes-gcm",
@@ -3208,7 +3208,7 @@ dependencies = [
  "cbc 0.2.0-rc.4",
  "futures-util",
  "hex",
- "hmac 0.13.0-rc.6",
+ "hmac 0.13.0",
  "idevice",
  "isideload-apple-codesign",
  "isideload-x509-certificate",
@@ -3224,7 +3224,8 @@ dependencies = [
  "rsa 0.10.0-rc.17",
  "serde",
  "serde_json",
- "sha2 0.11.0-rc.5",
+ "sha1 0.11.0",
+ "sha2 0.11.0",
  "srp",
  "thiserror 2.0.18",
  "tokio",
@@ -3345,7 +3346,7 @@ dependencies = [
  "scroll",
  "serde",
  "serde-xml-rs",
- "sha1",
+ "sha1 0.10.6",
  "sha2 0.10.9",
  "signature 2.2.0",
  "thiserror 2.0.18",
@@ -4321,7 +4322,7 @@ dependencies = [
  "hmac 0.12.1",
  "lazy_static",
  "rc2",
- "sha1",
+ "sha1 0.10.6",
  "yasna",
 ]
 
@@ -4342,7 +4343,7 @@ dependencies = [
  "pkcs5",
  "rand 0.10.0",
  "rc2",
- "sha1",
+ "sha1 0.10.6",
  "sha2 0.10.9",
  "thiserror 2.0.18",
  "x509-parser",
@@ -4436,7 +4437,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1f24f3eb2f4471b1730d59e4b730b747939960a8c7eb0c33c5a9076f2d3dddea"
 dependencies = [
  "digest 0.11.2",
- "hmac 0.13.0-rc.6",
+ "hmac 0.13.0",
 ]
 
 [[package]]
@@ -6127,6 +6128,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "sha1"
+version = "0.11.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "aacc4cc499359472b4abe1bf11d0b12e688af9a805fa5e3016f9a386dc2d0214"
+dependencies = [
+ "cfg-if",
+ "cpufeatures 0.3.0",
+ "digest 0.11.2",
+]
+
+[[package]]
 name = "sha2"
 version = "0.10.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6139,12 +6151,12 @@ dependencies = [
 
 [[package]]
 name = "sha2"
-version = "0.11.0-rc.5"
+version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7c5f3b1e2dc8aad28310d8410bd4d7e180eca65fca176c52ab00d364475d0024"
+checksum = "446ba717509524cb3f22f17ecc096f10f4822d76ab5c0b9822c5f9c284e825f4"
 dependencies = [
  "cfg-if",
- "cpufeatures 0.2.17",
+ "cpufeatures 0.3.0",
  "digest 0.11.2",
 ]
 
@@ -6342,9 +6354,9 @@ dependencies = [
 
 [[package]]
 name = "srp"
-version = "0.7.0-rc.1"
+version = "0.7.0-rc.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a0b7d0b0d27b2475e779315c09af698ac9f6d40016bc011bf3fa0f0054ce38ed"
+checksum = "4b5f622c2d21b826b3501f4c620ccc4696e4a09a6b51727fcb21036dec87c101"
 dependencies = [
  "crypto-bigint 0.7.2",
  "crypto-common 0.2.1",
@@ -7465,7 +7477,7 @@ dependencies = [
  "rand 0.9.2",
  "rustls",
  "rustls-pki-types",
- "sha1",
+ "sha1 0.10.6",
  "thiserror 2.0.18",
 ]
 
@@ -8781,7 +8793,7 @@ checksum = "1301e935010a701ae5f8655edc0ad17c44bad3ac5ce8c39185f75453b720ae94"
 dependencies = [
  "const-oid 0.9.6",
  "der 0.7.10",
- "sha1",
+ "sha1 0.10.6",
  "signature 2.2.0",
  "spki 0.7.3",
  "tls_codec",

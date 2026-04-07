@@ -192,7 +192,7 @@ async fn login(
 
     let mut account = AppleAccount::builder(&email.to_lowercase())
         .anisette_provider(
-            RemoteV3AnisetteProvider::default()
+            RemoteV3AnisetteProvider::default()?
                 .set_serial_number("0".to_string())
                 .set_storage(create_sideloading_storage(app)?)
                 .set_url(&anisette_url),
