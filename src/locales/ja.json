@@ -85,15 +85,15 @@
     "failed_select_prefix": "デバイスの選択に失敗しました: ",
     "loading_devices": "デバイスを読み込み中...",
     "no_devices_found": "デバイスが見つかりません",
-    "found_device": "見つかったデバイス",
-    "found_devices": "見つかったデバイス",
+    "found_device": "デバイスが見つかりました。",
+    "found_devices": "デバイスが複数見つかりました。",
     "unable_load_devices_prefix": "デバイスを読み込めません: ",
     "no_devices_found_period": "デバイスは検出されませんでした。",
     "selected": "選択済み"
   },
   "operation": {
     "failed": "操作に失敗しました。",
-    "completed": "操作が完了しました",
+    "completed": "操作が完了しました。",
     "please_wait": "お待ちください...",
     "copy_error_clipboard": "エラー内容をクリップボードにコピー"
   },
