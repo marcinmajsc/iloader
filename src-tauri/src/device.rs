@@ -33,7 +33,7 @@ pub type DeviceInfoMutex = Mutex<Option<DeviceInfoWithPairing>>;
 pub type PairingCancelToken = Mutex<Option<CancellationToken>>;
 
 #[tauri::command]
-pub async fn list_devices() -> Result<Vec<DeviceInfo>, AppError> {
+pub async fn list_devices() -> Result<Vec<Result<DeviceInfo, AppError>>, AppError> {
     let mut usbmuxd = get_usbmuxd().await?;
 
     let devs = usbmuxd.get_devices().await.map_err(|e| {
@@ -116,7 +116,7 @@ pub async fn list_devices() -> Result<Vec<DeviceInfo>, AppError> {
         })
         .collect();
 
-    let device_infos = futures::future::try_join_all(device_info_futures).await?;
+    let device_infos = futures::future::join_all(device_info_futures).await;
     Ok(device_infos)
 }
 

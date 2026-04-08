@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { useTranslation } from "react-i18next";
 import { Modal } from "./components/Modal";
 import { useError } from "./ErrorContext";
+import { AppError } from "./errors";
 
 export type DeviceInfo = {
   name: string;
@@ -94,7 +95,19 @@ export const Device = ({
     const promise = new Promise<number>(async (resolve, reject) => {
       listingDevices.current = true;
       try {
-        const devices = await invoke<DeviceInfo[]>("list_devices");
+        const results = await invoke<
+          Array<{ Ok: DeviceInfo } | { Err: AppError }>
+        >("list_devices");
+
+        const devices: DeviceInfo[] = [];
+        for (const result of results) {
+          if ("Ok" in result) {
+            devices.push(result.Ok);
+          } else if ("Err" in result) {
+            toast.error(err(t("device.unable_load_devices_prefix"), result.Err));
+          }
+        }
+
         setDevices(devices);
         if (selectedDevice) {
           const stillAvailable = devices.find(
