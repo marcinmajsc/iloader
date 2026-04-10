@@ -21,6 +21,14 @@ body:
     label: Error message
     description: "If this issue has an error message, click \"Copy to Clipboard\" in iloader and paste here. You can also upload screenshots, paste logs, or upload logfiles here."
     placeholder: Paste error here
+- type: checkboxes
+  id: suggestions
+  attributes:
+    label: "Please read and follow any suggestions iloader gives before making this issue."
+    description: iloader gives intelligent suggestions for many common errors. If you open an issue about one of these errors and did not try the suggestions, you will simply be told to follow the suggestions.
+    options:
+      - label: I followed ALL suggestions given by iloader
+        required: true
 - type: markdown
   attributes:
     value: "## Desktop Information"
