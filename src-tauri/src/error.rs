@@ -73,7 +73,7 @@ impl From<Report> for AppError {
         let report_str = report.to_string();
 
         for cause in report.iter_reports() {
-            if let Some(_) = cause.downcast_current_context::<keyring::Error>() {
+            if cause.downcast_current_context::<keyring::Error>().is_some() {
                 return AppError::Keyring(report_str);
             }
             if let Some(err) = cause.downcast_current_context::<SideloadError>() {
