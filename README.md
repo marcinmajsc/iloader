@@ -15,7 +15,7 @@
 
 ---
 
-[![Build iloader](https://github.com/nab138/iloader/actions/workflows/build.yml/badge.svg)](https://github.com/nab138/iloader/actions/workflows/build.yml)
+[![Build iloader](https://github.com/nab138/iloader/actions/workflows/build.yml/badge.svg)](https://github.com/nab138/iloader/actions/workflows/build.yml) ![Downloads](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/nab138/28258aff7e3f1d3a3084a21f4cff2e57/raw/iloader_downloads.json)
 
 Install SideStore (or other apps) and import your pairing file with ease
 
