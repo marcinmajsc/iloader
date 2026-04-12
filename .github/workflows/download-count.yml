@@ -27,4 +27,7 @@ jobs:
           filename: iloader_downloads.json
           label: downloads
           message: ${{ steps.count.outputs.download_count }}
-          color: blue
+          color: brightgreen
+          labelColor: 555
+          style: flat
+          logoSvg: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="white" d="M8 11.5l-4-4h2.5V3h3v4.5H12L8 11.5zM3 13h10v1.5H3z"/></svg>
