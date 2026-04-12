@@ -1,0 +1,27 @@
+name: Update Download Badge
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Run download counter
+        run: echo "DOWNLOAD_COUNT=$(bun count_downloads.ts)" >> $GITHUB_ENV
+
+      - name: Update Gist
+        uses: schneegans/dynamic-badges-action@v1.8.0
+        with:
+          auth: ${{ secrets.GIST_TOKEN }}
+          gistID: 28258aff7e3f1d3a3084a21f4cff2e57
+          filename: iloader_downloads.json
+          label: downloads
+          message: ${{ env.DOWNLOAD_COUNT }}
+          color: blue
