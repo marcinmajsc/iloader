@@ -111,6 +111,7 @@ Thank you to everyone who has contributed translations! See the [Translating](#t
 - [WingChunWong](https://github.com/WingChunWong): Cantonese (zh_hk) & Improved Chinese (zh_tw & zh_cn)
 - [marcinmajsc](https://github.com/marcinmajsc): Polish (pl)
 - [ern775](https://github.com/ern775): Turkish (tr)
+- [canpng](https://github.com/canpng): Improved Turkish (tr)
 - [jazoppix](https://github.com/jazoppix): Spanish (es)
 - [eseiker](https://github.com/eseiker): Korean (ko)
 - [seomin0610](https://github.com/seomin0610): Improved Korean (ko)
