@@ -51,6 +51,7 @@ const PAIRING_APPS: &[(&str, &str)] = &[
     ("SparseBox", "pairingFile.plist"),
     ("StikStore", "pairingFile.plist"),
     ("ByeTunes", "pairing file/pairingFile.plist"),
+    ("Reynard", "pairingFile.plist"),
 ];
 
 #[derive(Serialize)]
