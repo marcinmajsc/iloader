@@ -90,7 +90,11 @@
     "found_devices": "Znaleziono urządzenia",
     "unable_load_devices_prefix": "Nie można załadować urządzeń: ",
     "no_devices_found_period": "Nie znaleziono urządzeń.",
-    "selected": "Wybrane"
+    "selected": "Wybrane",
+    "pairing_in_progress_header": "Parowanie z {{device}}...",
+    "pairing_in_progress_hint": "Odblokuj urządzenie i kliknij „Zaufaj”, a następnie wprowadź kod, jeśli pojawi się monit.",
+    "pairing_cancel": "Anuluj",
+    "failed_select": "Nie udało się wybrać urządzenia"
   },
   "operation": {
     "failed": "Operacja nie powiodła się.",
@@ -187,7 +191,14 @@
     "info": "Info",
     "warn": "Ostrzeżenie",
     "error": "Błąd",
-    "language_hint": "Możesz pomóc w tłumaczeniach <translation>tutaj</translation>."
+    "language_hint": "Możesz pomóc w tłumaczeniach <translation>tutaj</translation>.",
+    "delete_stored_rppairing": "Usuń zapisane parowanie",
+    "delete_stored_rppairing_message": "Czy na pewno chcesz usunąć zapisany plik parowania dla tego urządzenia? Będzie to wymagało ponownego sparowania.",
+    "deleting_stored_rppairing": "Usuwanie zapisanego parowania...",
+    "stored_rppairing_deleted_success": "Zapisane parowanie zostało pomyślnie usunięte!",
+    "failed_delete_stored_rppairing": "Nie udało się usunąć zapisanego parowania",
+    "dont_use_keyring": "Nie używaj keyringu",
+    "dont_use_keyring_message": "To zmniejsza bezpieczeństwo iloadera, ponieważ pliki parowania, stan anisette i certyfikaty będą zapisywane na dysku. Włącz to tylko wtedy, gdy domyślne przechowywanie w keyringu nie działa i rozumiesz ryzyko."
   },
   "dialog": {
     "confirm": "Potwierdź",
@@ -196,7 +207,80 @@
   "error": {
     "title": "Wystąpił błąd: {{msg}}",
     "unknown": "Nieznany",
-    "support_message": "Jeśli problem będzie się powtarzać, naciśnij \"Skopiuj do schowka\" i wyślij skopiowany błąd na <discord>Discord</discord> lub jako <github>zgłoszenie GitHub</github>, aby uzyskać pomoc."
+    "support_message": "Jeśli problem będzie się powtarzać, naciśnij \"Skopiuj do schowka\" i wyślij skopiowany błąd na <discord>Discord</discord> lub jako <github>zgłoszenie GitHub</github>, aby uzyskać pomoc.",
+    "suggestions_heading": "Sugestie",
+    "suggestions": {
+      "underage": [
+        "Twoje Apple ID może nie spełniać wymaganego wieku do korzystania z usług deweloperskich."
+      ],
+      "account_locked": [
+        "Bez paniki! Zwykle dzieje się to po wielu nieudanych próbach logowania, ale jest całkowicie nieszkodliwe.",
+        "Odwiedź ((link:https://iforgot.apple.com/)), aby odblokować konto."
+      ],
+      "auth": [
+        "Upewnij się, że dane logowania są poprawne, i spróbuj ponownie, nawet jeśli były poprawne.",
+        "Jeśli problem nadal występuje, spróbuj użyć innego Apple ID.",
+        "2FA z kluczem bezpieczeństwa nie jest obsługiwane. Jeśli to możliwe, użyj Apple ID bez 2FA lub z 2FA opartym o zaufane urządzenie."
+      ],
+      "download": [
+        "Pobierz SideStore ręcznie z ((link:https://github.com/SideStore/SideStore/releases)) i użyj przycisku „Importuj IPA”, aby go zainstalować."
+      ],
+      "house_arrest": [
+        "[ios::26.3]Upewnij się, że urządzenie nie działa na deweloperskiej becie iOS 26.3, ponieważ zawiera błąd związany z house arrest"
+      ],
+      "pairing": [
+        "Spróbuj ponownie podłączyć urządzenie i wykonać akcję jeszcze raz.",
+        "Upewnij się, że urządzenie ma ustawiony kod blokady.",
+        "Upewnij się, że urządzenie jest podłączone przez USB, a nie bezprzewodowo."
+      ],
+      "canceled": [],
+      "operation_update": [],
+      "usbmuxd": [
+        "[platform::windows]Upewnij się, że masz zainstalowany ((link:https://apple.co/ms:iTunes)) i sprawdź, czy wykrywa urządzenie.",
+        "[platform::windows]Odinstaluj iTunes i Apple Mobile Device Support, a następnie zainstaluj „Apple Devices” ze sklepu Microsoft Store.",
+        "[platform::linux]Upewnij się, że usbmuxd jest zainstalowany i uruchomiony."
+      ],
+      "trust": [
+        "Odblokuj urządzenie, przejdź do ekranu głównego i zaakceptuj wszystkie pojawiające się monity o zaufanie."
+      ],
+      "device_coms": [
+        "Upewnij się, że urządzenie jest poprawnie podłączone do komputera.",
+        "Odłącz i podłącz urządzenie ponownie. Jeśli problem nadal występuje, spróbuj innego portu USB i kabla."
+      ],
+      "not_logged_in": [
+        "Najpierw zaloguj się do swojego Apple ID."
+      ],
+      "no_device_selected": [
+        "Wybierz urządzenie przed kontynuowaniem."
+      ],
+      "anisette": [
+        "Upewnij się, że komputer jest połączony z internetem.",
+        "Zmień serwer anisette. Spróbuj kilku różnych serwerów.",
+        "Upewnij się, że możesz otworzyć ((link:{{anisetteServerUrl}})) w przeglądarce."
+      ],
+      "keyring": [
+        "Spróbuj włączyć w ustawieniach opcję „Nie używaj keyringu”, aby obejść ten problem. Pamiętaj, że jest to mniej bezpieczne."
+      ],
+      "misc": [
+        "Spróbuj ponownie. Pomóc może też ponowne uruchomienie aplikacji, komputera i/lub telefonu."
+      ],
+      "admin": [
+        "Spróbuj uruchomić aplikację z podwyższonymi uprawnieniami (administrator/root)."
+      ],
+      "filesystem": [
+        "Upewnij się, że iloader ma uprawnienia do odczytu i zapisu plików w systemie."
+      ],
+      "not_enough_app_ids": [
+        "Nie masz wystarczającej liczby dostępnych ID aplikacji, aby zainstalować tę aplikację.",
+        "Poczekaj 7 dni, aż ID aplikacji wygasną (nie można ich usunąć wcześniej), a następnie spróbuj ponownie.",
+        "Instalacja aplikacji z SideStore czasami pozwala użyć mniejszej liczby ID aplikacji, więc spróbuj zainstalować stamtąd."
+      ],
+      "max_apps": [
+        "Z darmowym Apple ID możesz mieć jednocześnie zainstalowane tylko 3 sideloadowane aplikacje.",
+        "Usuń inne sideloadowane aplikacje, aby zwolnić miejsce dla tej.",
+        "Wygasłe aplikacje nadal wliczają się do limitu 3 aplikacji."
+      ]
+    }
   },
   "update": {
     "new_version_available": "Dostępna jest nowa wersja: {{version}}. Czy chcesz zaktualizować?",
