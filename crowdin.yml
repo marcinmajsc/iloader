@@ -1,5 +1,4 @@
-preserve_hierarchy: true
-
+preserve_hierarchy: 1
 files:
   - source: /src/locales/en.json
     translation: /src/locales/%two_letters_code%.json
