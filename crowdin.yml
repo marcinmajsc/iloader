@@ -1,4 +1,5 @@
-preserve_hierarchy: 1
+preserve_hierarchy: true
+
 files:
   - source: /src/locales/en.json
     translation: /src/locales/%locale_with_underscore%.json
