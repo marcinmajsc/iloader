@@ -2,9 +2,9 @@ preserve_hierarchy: true
 
 files:
   - source: /src/locales/en.json
-    translation: /src/locales/%locale_with_underscore%.json
+    translation: /src/locales/%two_letters_code%.json
     languages_mapping:
-      locale_with_underscore:
+      two_letters_code:
         zh-CN: zh_cn
         zh-TW: zh_tw
         zh-HK: zh_hk
