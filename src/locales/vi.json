@@ -78,18 +78,22 @@
     "max_certs_desc": "iLoader sẽ thu hồi chứng chỉ tồn tại của bạn để tạo một cái mới.",
     "hide_certificate_list": "Ẩn danh sách chứng chị",
     "choose_what_to_revoke": "Thu hôi cái gì nào?",
-    "continue": "Tiếp tục"
+    "continue": "Tiếp tục",
+    "no_keyring_available": "Unable to save credentials on this device."
   },
   "device": {
     "title": "iDevice",
-    "failed_select_prefix": "Chọn thiết bị này thất bại: ",
     "loading_devices": "Đang tải các thiết bị",
     "no_devices_found": "Không thấy thiết bị nào cả~",
     "found_device": "Đã tìm được thiết bị",
     "found_devices": "Đã tìm được các thiết bị",
     "unable_load_devices_prefix": "Tải các thiết bị thất bại",
     "no_devices_found_period": "Chẳng thấy thiết bị nào cả~",
-    "selected": "Đã chọn"
+    "selected": "Đã chọn",
+    "pairing_in_progress_header": "Pairing with {{device}}...",
+    "pairing_in_progress_hint": "Please unlock your device and click \"Trust,\" then enter your passcode if prompted.",
+    "pairing_cancel": "Cancel",
+    "failed_select": "Failed to select device"
   },
   "operation": {
     "failed": "Quá trình thất bại",
@@ -163,7 +167,8 @@
     "pairing_file_exported_success": "Đã xuất tệp ghép máy thành công!",
     "failed_export_pairing_file": "Xuất tệp ghép máy thất bại",
     "export_not_recommended": "Xuất tệp ghép máy (Không khuyến khích)",
-    "refresh_installed_apps": "Làm mới các ứng dụng đã tải"
+    "refresh_installed_apps": "Làm mới các ứng dụng đã tải",
+    "place_all": "Place In All Apps"
   },
   "settings": {
     "anisette_server": "Máy chủ Anisette:",
@@ -175,6 +180,7 @@
     "reset_anisette_message": "Bạn có chắc là bạn muốn đặt lại trạng thái của máy chủ Anisette không? Bạn sẽ phải nhập mã xác minh lại đấy.",
     "resetting_anisette_state": "Đang đặt lại trạng thái máy chủ Anisette",
     "anisette_state_reset_success": "Đã đặt lại trạng thát máy chủ Anisette thành công",
+    "anisette_state_not_found": "No anisette state to reset",
     "failed_reset_anisette_state": "Đặt lại trạng thái máy chủ Anisette thất bại",
     "view_logs": "Xem Logs",
     "logs": "Logs",
@@ -184,7 +190,14 @@
     "info": "Thông tin",
     "warn": "Cảnh báo",
     "error": "Lỗi",
-    "language_hint": "Bạn có thể giúp dịch iLoader ở <translation>đây</translation>."
+    "language_hint": "Bạn có thể giúp dịch iLoader ở <translation>đây</translation>.",
+    "delete_stored_rppairing": "Delete Stored Pairing",
+    "delete_stored_rppairing_message": "Are you sure you want to delete the stored pairing file for this device? This will require you to pair again.",
+    "deleting_stored_rppairing": "Deleting stored pairing...",
+    "stored_rppairing_deleted_success": "Stored pairing deleted successfully!",
+    "failed_delete_stored_rppairing": "Failed to delete stored pairing",
+    "dont_use_keyring": "Don't use keyring",
+    "dont_use_keyring_message": "This makes iloader less secure by storing pairing files, anisette state, and certitficates on disk. Enable this only if the default keyring storage doesn't work and you understand the risks."
   },
   "dialog": {
     "confirm": "Xác nhận",
@@ -193,6 +206,79 @@
   "error": {
     "title": "Một lỗi đã xảy ra: {{msg}}",
     "unknown": "Không xác định",
+    "suggestions_heading": "Suggestions",
+    "suggestions": {
+      "underage": [
+        "Your Apple ID may be below the required age to use developer services."
+      ],
+      "account_locked": [
+        "Don't panic! This usually occurs after multiple failed login attempts, but it is completely harmless.",
+        "Visit ((link:https://iforgot.apple.com/)) to unlock your account."
+      ],
+      "auth": [
+        "Make sure your credentials are correct and try again, even if they were correct.",
+        "If the issue persists, try using another Apple ID.",
+        "Security Key 2FA is not supported. If possible, use an Apple ID with no 2FA or with trusted device 2FA."
+      ],
+      "download": [
+        "Download SideStore manually from ((link:https://github.com/SideStore/SideStore/releases)) and use the \"Import IPA\" button to install it."
+      ],
+      "house_arrest": [
+        "[ios::26.3]Ensure your device is not on a developer beta of iOS 26.3, as it has a bug with house arrest"
+      ],
+      "pairing": [
+        "Try reconnecting the device and running the action again.",
+        "Ensure your device has a passcode set.",
+        "Ensure your device is connected via USB, not wirelessly."
+      ],
+      "canceled": [],
+      "operation_update": [],
+      "usbmuxd": [
+        "[platform::windows]Ensure you have ((link:https://apple.co/ms:iTunes)) installed and check that it can detect your device.",
+        "[platform::windows]Uninstall iTunes and Apple Mobile Device Support, then install \"Apple Devices\" from the Microsoft Store.",
+        "[platform::linux]Make sure usbmuxd is installed and running."
+      ],
+      "trust": [
+        "Unlock your device, go to the home screen, and accept any trust prompts that appear."
+      ],
+      "device_coms": [
+        "Ensure your device is properly connected to your computer.",
+        "Unplug and reconnect the device. If the issue persists, try a different USB port and cable."
+      ],
+      "not_logged_in": [
+        "Sign in to your Apple ID first."
+      ],
+      "no_device_selected": [
+        "Select a device before continuing."
+      ],
+      "anisette": [
+        "Ensure your computer is connected to the internet.",
+        "Change your anisette server. Try several different servers.",
+        "Make sure you can access ((link:{{anisetteServerUrl}})) in a browser."
+      ],
+      "keyring": [
+        "Try enabling \"Don't use keyring\" in settings to bypass this issue. Note that this is less secure."
+      ],
+      "misc": [
+        "Try again. Restarting the app, your computer, and/or your phone may also help."
+      ],
+      "admin": [
+        "Try running the app with elevated permissions (as administrator/root)."
+      ],
+      "filesystem": [
+        "Make sure iloader has permission to read and write files on your system."
+      ],
+      "not_enough_app_ids": [
+        "You do not have enough App IDs available to install this app.",
+        "Wait for App IDs to expire after 7 days (cannot be deleted sooner), then try again.",
+        "Installing apps from SideStore sometimes allows you to use less App IDs, so try installing from there instead."
+      ],
+      "max_apps": [
+        "You can only have 3 sideloaded apps installed at a time with a free Apple ID.",
+        "Delete other sideloaded apps to free up space for this one.",
+        "Expired apps still count towards the 3 app limit."
+      ]
+    },
     "support_message": "Nếu vấn đề vẫn tiếp diễn, bấm \"Sao chép vào bộ nhớ tạm\" và gửi đến server <discord>Discord</discord> hoặc một <github>vấn đề Github</github> để được hỗ trợ."
   },
   "update": {

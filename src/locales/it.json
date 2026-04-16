@@ -78,18 +78,22 @@
     "max_certs_desc": "iloader revocherà i certificati esistenti e ne genererà uno nuovo.",
     "hide_certificate_list": "Nascondi lista certificati",
     "choose_what_to_revoke": "Scegli quale revocare",
-    "continue": "Continua"
+    "continue": "Continua",
+    "no_keyring_available": "Unable to save credentials on this device."
   },
   "device": {
     "title": "iDevice",
-    "failed_select_prefix": "Impossibile scegliere dispositivo: ",
     "loading_devices": "Carico dispositivi...",
     "no_devices_found": "Nessun dispositivo trovato",
     "found_device": "Dispositivo trovato",
     "found_devices": "Dispositivi trovati",
     "unable_load_devices_prefix": "Impossibile caricare dispositivi: ",
     "no_devices_found_period": "Nessun dispositivo trovato",
-    "selected": "Selezionato"
+    "selected": "Selezionato",
+    "pairing_in_progress_header": "Pairing with {{device}}...",
+    "pairing_in_progress_hint": "Please unlock your device and click \"Trust,\" then enter your passcode if prompted.",
+    "pairing_cancel": "Cancel",
+    "failed_select": "Failed to select device"
   },
   "operation": {
     "failed": "Operazione fallita.",
@@ -163,7 +167,8 @@
     "pairing_file_exported_success": "Pairing file esportato correttamente!",
     "failed_export_pairing_file": "Impossibile esportare pairing file",
     "export_not_recommended": "Esporta (Sconsigliato)",
-    "refresh_installed_apps": "Aggiorna app installate"
+    "refresh_installed_apps": "Aggiorna app installate",
+    "place_all": "Place In All Apps"
   },
   "settings": {
     "anisette_server": "Server Anisette:",
@@ -175,6 +180,7 @@
     "reset_anisette_message": "Sei sicuro di voler resettare lo stato anisette? Dovrai inserire il codice 2FA di nuovo.",
     "resetting_anisette_state": "Resettando stato anisette...",
     "anisette_state_reset_success": "Stato anisette resettato correttamente",
+    "anisette_state_not_found": "No anisette state to reset",
     "failed_reset_anisette_state": "Impossibile resettare stato anisette",
     "view_logs": "Vedi Log",
     "logs": "Log",
@@ -200,7 +206,6 @@
   "error": {
     "title": "Si è verificato un errore: {{msg}}",
     "unknown": "Sconosciuto",
-    "support_message": "Se il problema persiste, premi \"Copia negli appunti\" e invia l'errore copiato nel <discord>Discord</discord> o invia un'<github>issue GitHub</github> per supporto.",
     "suggestions_heading": "Suggerimenti",
     "suggestions": {
       "underage": [
@@ -240,8 +245,12 @@
         "Verifica che il dispositivo sia connesso correttamente al computer.",
         "Disconnetti e riconnetti il dispositivo. Se il problema persiste, prova un altra porta USB oppure un altro cavo."
       ],
-      "not_logged_in": ["Accedi al tuo Apple Account prima."],
-      "no_device_selected": ["Seleziona un dispositivo per continuare."],
+      "not_logged_in": [
+        "Accedi al tuo Apple Account prima."
+      ],
+      "no_device_selected": [
+        "Seleziona un dispositivo per continuare."
+      ],
       "anisette": [
         "Verifica che il computer è connesso ad Internet.",
         "Change your anisette server. Try several different servers.",
@@ -269,7 +278,8 @@
         "Elimina altre app sideloaded per liberare spazio per questa applicazione.",
         "Le app scadute vengono contate nel limite di 3 app."
       ]
-    }
+    },
+    "support_message": "Se il problema persiste, premi \"Copia negli appunti\" e invia l'errore copiato nel <discord>Discord</discord> o invia un'<github>issue GitHub</github> per supporto."
   },
   "update": {
     "new_version_available": "È disponibile una nuova versione: {{version}}. Vuoi aggiornare?",

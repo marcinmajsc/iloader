@@ -83,14 +83,17 @@
   },
   "device": {
     "title": "기기",
-    "failed_select_prefix": "기기 선택에 실패했습니다: ",
     "loading_devices": "기기 불러오는 중...",
     "no_devices_found": "기기가 발견되지 않았습니다.",
     "found_device": "기기를 찾았습니다",
     "found_devices": "기기들을 찾았습니다",
     "unable_load_devices_prefix": "기기를 불러오지 못했습니다: ",
     "no_devices_found_period": "기기가 발견되지 않았습니다.",
-    "selected": "선택됨"
+    "selected": "선택됨",
+    "pairing_in_progress_header": "Pairing with {{device}}...",
+    "pairing_in_progress_hint": "Please unlock your device and click \"Trust,\" then enter your passcode if prompted.",
+    "pairing_cancel": "Cancel",
+    "failed_select": "Failed to select device"
   },
   "operation": {
     "failed": "작업에 실패했습니다.",
@@ -177,6 +180,7 @@
     "reset_anisette_message": "Anisette 상태를 초기화할까요? 이중 확인 코드를 다시 입력해야 합니다.",
     "resetting_anisette_state": "Anisette 상태 초기화 중...",
     "anisette_state_reset_success": "Anisette 상태 초기화 성공",
+    "anisette_state_not_found": "No anisette state to reset",
     "failed_reset_anisette_state": "Anisette 상태 초기화 실패",
     "view_logs": "로그 보기",
     "logs": "로그",
@@ -186,7 +190,14 @@
     "info": "정보",
     "warn": "경고",
     "error": "오류",
-    "language_hint": "<translation>여기서</translation> 번역을 도와주세요!"
+    "language_hint": "<translation>여기서</translation> 번역을 도와주세요!",
+    "delete_stored_rppairing": "Delete Stored Pairing",
+    "delete_stored_rppairing_message": "Are you sure you want to delete the stored pairing file for this device? This will require you to pair again.",
+    "deleting_stored_rppairing": "Deleting stored pairing...",
+    "stored_rppairing_deleted_success": "Stored pairing deleted successfully!",
+    "failed_delete_stored_rppairing": "Failed to delete stored pairing",
+    "dont_use_keyring": "Don't use keyring",
+    "dont_use_keyring_message": "This makes iloader less secure by storing pairing files, anisette state, and certitficates on disk. Enable this only if the default keyring storage doesn't work and you understand the risks."
   },
   "dialog": {
     "confirm": "확인",
@@ -195,6 +206,79 @@
   "error": {
     "title": "에러: {{msg}}",
     "unknown": "알 수 없음",
+    "suggestions_heading": "Suggestions",
+    "suggestions": {
+      "underage": [
+        "Your Apple ID may be below the required age to use developer services."
+      ],
+      "account_locked": [
+        "Don't panic! This usually occurs after multiple failed login attempts, but it is completely harmless.",
+        "Visit ((link:https://iforgot.apple.com/)) to unlock your account."
+      ],
+      "auth": [
+        "Make sure your credentials are correct and try again, even if they were correct.",
+        "If the issue persists, try using another Apple ID.",
+        "Security Key 2FA is not supported. If possible, use an Apple ID with no 2FA or with trusted device 2FA."
+      ],
+      "download": [
+        "Download SideStore manually from ((link:https://github.com/SideStore/SideStore/releases)) and use the \"Import IPA\" button to install it."
+      ],
+      "house_arrest": [
+        "[ios::26.3]Ensure your device is not on a developer beta of iOS 26.3, as it has a bug with house arrest"
+      ],
+      "pairing": [
+        "Try reconnecting the device and running the action again.",
+        "Ensure your device has a passcode set.",
+        "Ensure your device is connected via USB, not wirelessly."
+      ],
+      "canceled": [],
+      "operation_update": [],
+      "usbmuxd": [
+        "[platform::windows]Ensure you have ((link:https://apple.co/ms:iTunes)) installed and check that it can detect your device.",
+        "[platform::windows]Uninstall iTunes and Apple Mobile Device Support, then install \"Apple Devices\" from the Microsoft Store.",
+        "[platform::linux]Make sure usbmuxd is installed and running."
+      ],
+      "trust": [
+        "Unlock your device, go to the home screen, and accept any trust prompts that appear."
+      ],
+      "device_coms": [
+        "Ensure your device is properly connected to your computer.",
+        "Unplug and reconnect the device. If the issue persists, try a different USB port and cable."
+      ],
+      "not_logged_in": [
+        "Sign in to your Apple ID first."
+      ],
+      "no_device_selected": [
+        "Select a device before continuing."
+      ],
+      "anisette": [
+        "Ensure your computer is connected to the internet.",
+        "Change your anisette server. Try several different servers.",
+        "Make sure you can access ((link:{{anisetteServerUrl}})) in a browser."
+      ],
+      "keyring": [
+        "Try enabling \"Don't use keyring\" in settings to bypass this issue. Note that this is less secure."
+      ],
+      "misc": [
+        "Try again. Restarting the app, your computer, and/or your phone may also help."
+      ],
+      "admin": [
+        "Try running the app with elevated permissions (as administrator/root)."
+      ],
+      "filesystem": [
+        "Make sure iloader has permission to read and write files on your system."
+      ],
+      "not_enough_app_ids": [
+        "You do not have enough App IDs available to install this app.",
+        "Wait for App IDs to expire after 7 days (cannot be deleted sooner), then try again.",
+        "Installing apps from SideStore sometimes allows you to use less App IDs, so try installing from there instead."
+      ],
+      "max_apps": [
+        "You can only have 3 sideloaded apps installed at a time with a free Apple ID.",
+        "Delete other sideloaded apps to free up space for this one.",
+        "Expired apps still count towards the 3 app limit."
+      ]
+    },
     "support_message": "문제가 계속된다면 지원을 받기 위해 \"클립보드로 복사\"를 눌러 <discord>디스코드</discord>나 <github>GitHub 이슈</github>에 올려주세요."
   },
   "update": {

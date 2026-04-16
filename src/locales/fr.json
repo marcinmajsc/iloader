@@ -78,18 +78,22 @@
     "max_certs_desc": "iloader révoquera vos certificats existants et en générera un nouveau.",
     "hide_certificate_list": "Masquer la liste des certificats",
     "choose_what_to_revoke": "Choisir quoi révoquer",
-    "continue": "Continuer"
+    "continue": "Continuer",
+    "no_keyring_available": "Unable to save credentials on this device."
   },
   "device": {
     "title": "iDevice",
-    "failed_select_prefix": "Échec de la sélection de l'appareil : ",
     "loading_devices": "Chargement des appareils...",
     "no_devices_found": "Aucun appareil trouvé",
     "found_device": "Appareil trouvé",
     "found_devices": "Appareils trouvés",
     "unable_load_devices_prefix": "Impossible de charger les appareils : ",
     "no_devices_found_period": "Aucun appareil trouvé.",
-    "selected": "Sélectionné"
+    "selected": "Sélectionné",
+    "pairing_in_progress_header": "Pairing with {{device}}...",
+    "pairing_in_progress_hint": "Please unlock your device and click \"Trust,\" then enter your passcode if prompted.",
+    "pairing_cancel": "Cancel",
+    "failed_select": "Failed to select device"
   },
   "operation": {
     "failed": "L'opération a échoué.",
@@ -163,7 +167,8 @@
     "pairing_file_exported_success": "Fichier de jumelage exporté avec succès !",
     "failed_export_pairing_file": "Échec de l'exportation du fichier de jumelage",
     "export_not_recommended": "Exporter (Non recommandé)",
-    "refresh_installed_apps": "Actualiser les applications installées"
+    "refresh_installed_apps": "Actualiser les applications installées",
+    "place_all": "Place In All Apps"
   },
   "settings": {
     "anisette_server": "Serveur Anisette :",
@@ -175,6 +180,7 @@
     "reset_anisette_message": "Êtes-vous sûr de vouloir réinitialiser l'état d'Anisette ? Vous devrez saisir à nouveau votre code 2FA.",
     "resetting_anisette_state": "Réinitialisation de l'état d'Anisette...",
     "anisette_state_reset_success": "État d'Anisette réinitialisé avec succès",
+    "anisette_state_not_found": "No anisette state to reset",
     "failed_reset_anisette_state": "Échec de la réinitialisation de l'état d'Anisette",
     "view_logs": "Voir les journaux",
     "logs": "Journaux",
@@ -184,7 +190,14 @@
     "info": "Info",
     "warn": "Avertissement",
     "error": "Erreur",
-    "language_hint": "Vous pouvez aider à la traduction <translation>ici</translation>."
+    "language_hint": "Vous pouvez aider à la traduction <translation>ici</translation>.",
+    "delete_stored_rppairing": "Delete Stored Pairing",
+    "delete_stored_rppairing_message": "Are you sure you want to delete the stored pairing file for this device? This will require you to pair again.",
+    "deleting_stored_rppairing": "Deleting stored pairing...",
+    "stored_rppairing_deleted_success": "Stored pairing deleted successfully!",
+    "failed_delete_stored_rppairing": "Failed to delete stored pairing",
+    "dont_use_keyring": "Don't use keyring",
+    "dont_use_keyring_message": "This makes iloader less secure by storing pairing files, anisette state, and certitficates on disk. Enable this only if the default keyring storage doesn't work and you understand the risks."
   },
   "dialog": {
     "confirm": "Confirmer",
@@ -193,6 +206,79 @@
   "error": {
     "title": "Une erreur est survenue : {{msg}}",
     "unknown": "Inconnu",
+    "suggestions_heading": "Suggestions",
+    "suggestions": {
+      "underage": [
+        "Your Apple ID may be below the required age to use developer services."
+      ],
+      "account_locked": [
+        "Don't panic! This usually occurs after multiple failed login attempts, but it is completely harmless.",
+        "Visit ((link:https://iforgot.apple.com/)) to unlock your account."
+      ],
+      "auth": [
+        "Make sure your credentials are correct and try again, even if they were correct.",
+        "If the issue persists, try using another Apple ID.",
+        "Security Key 2FA is not supported. If possible, use an Apple ID with no 2FA or with trusted device 2FA."
+      ],
+      "download": [
+        "Download SideStore manually from ((link:https://github.com/SideStore/SideStore/releases)) and use the \"Import IPA\" button to install it."
+      ],
+      "house_arrest": [
+        "[ios::26.3]Ensure your device is not on a developer beta of iOS 26.3, as it has a bug with house arrest"
+      ],
+      "pairing": [
+        "Try reconnecting the device and running the action again.",
+        "Ensure your device has a passcode set.",
+        "Ensure your device is connected via USB, not wirelessly."
+      ],
+      "canceled": [],
+      "operation_update": [],
+      "usbmuxd": [
+        "[platform::windows]Ensure you have ((link:https://apple.co/ms:iTunes)) installed and check that it can detect your device.",
+        "[platform::windows]Uninstall iTunes and Apple Mobile Device Support, then install \"Apple Devices\" from the Microsoft Store.",
+        "[platform::linux]Make sure usbmuxd is installed and running."
+      ],
+      "trust": [
+        "Unlock your device, go to the home screen, and accept any trust prompts that appear."
+      ],
+      "device_coms": [
+        "Ensure your device is properly connected to your computer.",
+        "Unplug and reconnect the device. If the issue persists, try a different USB port and cable."
+      ],
+      "not_logged_in": [
+        "Sign in to your Apple ID first."
+      ],
+      "no_device_selected": [
+        "Select a device before continuing."
+      ],
+      "anisette": [
+        "Ensure your computer is connected to the internet.",
+        "Change your anisette server. Try several different servers.",
+        "Make sure you can access ((link:{{anisetteServerUrl}})) in a browser."
+      ],
+      "keyring": [
+        "Try enabling \"Don't use keyring\" in settings to bypass this issue. Note that this is less secure."
+      ],
+      "misc": [
+        "Try again. Restarting the app, your computer, and/or your phone may also help."
+      ],
+      "admin": [
+        "Try running the app with elevated permissions (as administrator/root)."
+      ],
+      "filesystem": [
+        "Make sure iloader has permission to read and write files on your system."
+      ],
+      "not_enough_app_ids": [
+        "You do not have enough App IDs available to install this app.",
+        "Wait for App IDs to expire after 7 days (cannot be deleted sooner), then try again.",
+        "Installing apps from SideStore sometimes allows you to use less App IDs, so try installing from there instead."
+      ],
+      "max_apps": [
+        "You can only have 3 sideloaded apps installed at a time with a free Apple ID.",
+        "Delete other sideloaded apps to free up space for this one.",
+        "Expired apps still count towards the 3 app limit."
+      ]
+    },
     "support_message": "Si le problème persiste, appuyez sur \"Copier dans le presse-papiers\" et envoyez l'erreur copiée sur <discord>Discord</discord> ou dans un <github>ticket GitHub</github> pour obtenir de l'aide."
   },
   "update": {

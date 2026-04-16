@@ -83,7 +83,6 @@
   },
   "device": {
     "title": "iDevice",
-    "failed_select_prefix": "Nem sikerült kiválasztani az eszközt: ",
     "loading_devices": "Eszközök betöltése...",
     "no_devices_found": "Nem találtunk eszközöket",
     "found_device": "Találtunk eszközt",
@@ -93,7 +92,8 @@
     "selected": "Kiválasztva",
     "pairing_in_progress_header": "Párosítás a {{device}} készülékkel...",
     "pairing_in_progress_hint": "Kérjük, oldja fel a készülék zárolását és kattintson a \"Trust,\" gombra, majd ha a rendszer kéri, írja be a jelszavát.",
-    "pairing_cancel": "Megszakítás"
+    "pairing_cancel": "Megszakítás",
+    "failed_select": "Failed to select device"
   },
   "operation": {
     "failed": "Sikertelen művelet.",
@@ -245,8 +245,12 @@
         "Biztosítsd, hogy a készüléked rendesen csatlakoztatva van a gépedhez.",
         "Húzd ki és csatlakoztasd újra a készüléket. Ha a probléma még mindig fennáll, próbálj egy másik USB portot vagy kábelt."
       ],
-      "not_logged_in": ["Jelentkezz be az Apple fiókoddal először."],
-      "no_device_selected": ["Válassz ki egy készüléket mielőtt folytatnád."],
+      "not_logged_in": [
+        "Jelentkezz be az Apple fiókoddal először."
+      ],
+      "no_device_selected": [
+        "Válassz ki egy készüléket mielőtt folytatnád."
+      ],
       "anisette": [
         "Biztosítsd, hogy a géped csatlakozva van az internedhez.",
         "Caseréld le az Anisette szervered. Próbálj meg másik szervereket.",
